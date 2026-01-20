@@ -11,9 +11,11 @@ const express = require("express")
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const path = require("path");
 const FirstRoute = require("./Routes/firstRoute")
 app.use(cors())
 app.use(express.json());
+app.use(express.static(path.join(__dirname,"uploads")))
 
 mongoose.connect("mongodb://localhost:27017/")
 .then(res =>{

@@ -63,7 +63,19 @@ const DeleteData = async(req,res)=>{
     }
 }
 
+const UploadFile = async(req,res) => {
+    try{
+        console.log(req.files)
+        return res.status(200).json(req.files)
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json(err)
+    }
+}
+
 exports.AddData = AddData
 exports.GetData = GetData
 exports.UpdateData = UpdateData
 exports.DeleteData = DeleteData
+exports.UploadFile = UploadFile
