@@ -12,6 +12,7 @@
 const express = require('express')
 const UserInfo = require('../Models/UserInfo')
 const Bcrypt=require('bcrypt')
+const Cron = require('node-cron')
 const AddData = async(req,res) =>{
     try{
         console.log(req.body)
@@ -99,6 +100,10 @@ const VerifyEncryption=async(req,res)=>{
     }
 }
 exports.VerifyEncryption=VerifyEncryption
+
+Cron.schedule("* * * * * * ",()=>{
+    console.log("Cron Job executed")
+})
 
 exports.AddData = AddData
 exports.GetData = GetData
