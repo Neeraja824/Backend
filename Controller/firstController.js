@@ -11,6 +11,7 @@
 
 const express = require('express')
 const UserInfo = require('../Models/UserInfo')
+const Bcrypt=require('bcrypt')
 const AddData = async(req,res) =>{
     try{
         console.log(req.body)
@@ -73,9 +74,33 @@ const UploadFile = async(req,res) => {
         return res.status(500).json(err)
     }
 }
+exports.UploadFile = UploadFile
+
+
+const Encryption=async(req,res)=>{
+    try{
+        const encode=await bcrypt.hash(req.body.password,10)
+        return res.status(200).json(encode)
+    }
+    catch(err){
+        return res.status(500).json(err)
+    }
+}
+exports.Encryption=Encryption
+
+const VerifyEncryption=async(req,res)=>{
+    try{
+        const encrypted="$2b$10$s7pH.3.UUFTCLJAPB87x9udU2lJj6BX5vGiqqmQBfKdcEw/FflzQa"
+        const result=await Bcrypt.compare(req.body.password,encrypted)
+        return res.status(200).json(result)
+    }
+    catch(err){
+        return res.status(500).json(err)
+    }
+}
+exports.VerifyEncryption=VerifyEncryption
 
 exports.AddData = AddData
 exports.GetData = GetData
 exports.UpdateData = UpdateData
 exports.DeleteData = DeleteData
-exports.UploadFile = UploadFile

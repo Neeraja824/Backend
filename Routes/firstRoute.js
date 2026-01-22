@@ -42,6 +42,8 @@ const Upload = multer({
     }
 })
 
+route.post("/encrypted-token",FirstController.Encryption)
+route.post("/verify-encrypted-token",FirstController.VerifyEncryption)
 route.post("/file-upload",Upload.array('file',3),FirstController.UploadFile)
 
 route.post("/add-data",FirstController.AddData)
